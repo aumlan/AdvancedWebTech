@@ -25,5 +25,11 @@ module.exports = {
             callback(status);
         });
     },
+    delete: function(restaurantId, callback) {
+        var sql = "delete from restaurants where R_ID = ?";
+        db.execute(sql, [restaurantId], function(status) {
+            callback(status);
+        });
+    }
 
 }

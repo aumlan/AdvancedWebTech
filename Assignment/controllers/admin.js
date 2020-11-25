@@ -195,53 +195,26 @@ router.post('/restaurant/edit/:restaurantId', (req, res) => {
 //*todo edit restaurant endddd
 
 
+//*todo delete restaurant
+router.get('/restaurant/delete/:restaurantId', (req, res) => {
+    restaurantModel.get(req.params.restaurantId, function(result) {
+        if (result.length > 0) {
+            res.render('admin/deleteRestaurant', result[0]);
+        } else {
+            res.redirect('/admin/restaurants');
+        }
+    });
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+router.post('/restaurant/delete/:restaurantId', (req, res) => {
+    restaurantModel.delete(req.params.restaurantId, function(success) {
+        if (success) {
+            res.redirect('/admin/restaurants');
+        } else {
+            res.redirect("/admin/restaurant/delete/" + req.params.restaurantId);
+        }
+    });
+});
 
 
 
