@@ -1,6 +1,8 @@
 var express = require('express');
 var adminModel = require.main.require('./model/adminModel');
 var restaurantModel = require.main.require('./model/restaurantModel');
+
+var foodModel = require.main.require('./model/foodModel');
 var router = express.Router();
 
 router.get('*', function(req, res, next) {
@@ -52,9 +54,10 @@ router.post('/editProfile', (req, res) => {
     });
 });
 
-//*todo edit profile
+//*todo edit profile endddddddd
 
 
+//*todo add restaurant
 router.get('/addRestaurant', (req, res) => {
     res.render('admin/addRestaurant');
 });
@@ -77,8 +80,10 @@ router.post('/addRestaurant', (req, res) => {
     });
 });
 
+//*todo add restaurant endddddddd
 
 
+//*todo edit restaurant
 router.get('/restaurants', (req, res) => {
     restaurantModel.getAll(function(results) {
         if (results.length > 0) {
@@ -91,6 +96,7 @@ router.get('/restaurants', (req, res) => {
 });
 
 router.post('/restaurant/edit/:restaurantId', (req, res) => {
+
     var restaurant = {
         id: req.body.id,
         name: req.body.name,
@@ -108,9 +114,52 @@ router.post('/restaurant/edit/:restaurantId', (req, res) => {
     });
 });
 
+//*todo edit restaurant endd
 
 
+//*todo add menu
+router.get('/restaurant/addMenu1/:restaurantId', (req, res) => {
+    restaurantModel.get(req.params.restaurantId, function(result) {
+        if (result.length > 0) {
+            res.render('admin/addMenu1', result[0]);
+        }
+    });
+});
 
+router.post('/restaurant/addMenu1/:restaurantId', (req, res) => {
+    console.log("ad mmenuu");
+    var food = {
+        title: req.body.title,
+        description: req.body.description,
+        image: "/pictures/" + res.req.file.filename,
+        restaurantId: req.params.restaurantId
+    };
+    foodModel.insert(food, function(success) {
+        if (success) {
+            res.redirect('/admin/restaurant/view/' + req.params.restaurantId);
+        } else {
+            res.redirect("/admin/restaurant/addMenu/" + req.params.restaurantId);
+        }
+    });
+});
+
+router.get('/restaurant/:restaurantId/menu/delete/:menuId', (req, res) => {
+    foodModel.get(req.params.menuId, function(result) {
+        if (result.length > 0) {
+            res.render('admin/deleteMenu', result[0]);
+        }
+    });
+});
+
+router.post('/restaurant/:restaurantId/menu/delete/:menuId', (req, res) => {
+    foodModel.delete(req.params.menuId, function(success) {
+        if (success) {
+            res.redirect('/admin/restaurant/view/' + req.params.restaurantId);
+        } else {
+            res.redirect('/admin/restaurant/' + req.params.restaurantId + '/menu/delete/' + req.params.menuId);
+        }
+    });
+});
 
 
 
