@@ -19,4 +19,16 @@ module.exports = {
             callback(status);
         });
     },
+    getAllByRestaurantId: function(restaurantId, callback) {
+        var sql = "select * from foods where R_ID = ?";
+        db.getResult(sql, [restaurantId], function(results) {
+            callback(results);
+        });
+    },
+    delete: function(foodId, callback) {
+        var sql = "delete from foods where F_ID = ?";
+        db.execute(sql, [foodId], function(status) {
+            callback(status);
+        });
+    }
 }

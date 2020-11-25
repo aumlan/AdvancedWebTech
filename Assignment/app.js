@@ -32,6 +32,7 @@ var storage = multer.diskStorage({
 app.use(multer({
     storage: storage
 }).single('imageFile'));
+
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/admin', admin);
@@ -39,7 +40,7 @@ app.use('/member', member);
 
 
 app.use('/', express.static('asset'));
-/*app.use('/pictures', express.static('images'));*/
+app.use('/pictures', express.static('images'));
 
 
 //router
