@@ -19,5 +19,11 @@ module.exports = {
             callback(status);
         });
     },
+    update: function(restaurant, callback) {
+        var sql = "update restaurants set R_NAME = ?, R_DESCRIPTION = ?, R_TYPE = ?, R_LOCATION = ?, R_STATUS  = ? where R_ID = ?";
+        db.execute(sql, [restaurant.name, restaurant.description, restaurant.type, restaurant.location, restaurant.status, restaurant.id], function(status) {
+            callback(status);
+        });
+    },
 
 }

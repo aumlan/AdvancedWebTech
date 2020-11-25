@@ -134,6 +134,7 @@ router.post('/restaurant/addMenu1/:restaurantId', (req, res) => {
         image: "/pictures/" + res.req.file.filename,
         restaurantId: req.params.restaurantId
     };
+    console.log(food.image);
     foodModel.insert(food, function(success) {
         if (success) {
             res.redirect('/admin/restaurant/view/' + req.params.restaurantId);
@@ -160,6 +161,80 @@ router.post('/restaurant/:restaurantId/menu/delete/:menuId', (req, res) => {
         }
     });
 });
+
+//*todo add menu endddd
+
+//*todo edit restaurant
+router.get('/restaurant/edit/:restaurantId', (req, res) => {
+    restaurantModel.get(req.params.restaurantId, function(result) {
+        if (result.length > 0) {
+            res.render('admin/editRestaurant', result[0]);
+        } else {
+            res.redirect('/admin/restaurants');
+        }
+    });
+});
+
+router.post('/restaurant/edit/:restaurantId', (req, res) => {
+    var restaurant = {
+        id: req.body.id,
+        name: req.body.name,
+        description: req.body.description,
+        type: req.body.type,
+        location: req.body.location,
+        status: "VALID",
+    };
+    restaurantModel.update(restaurant, function(success) {
+        if (success) {
+            res.redirect('/admin/restaurants');
+        } else {
+            res.render("/admin/restaurant/edit/" + req.params.restaurantId);
+        }
+    });
+});
+//*todo edit restaurant endddd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

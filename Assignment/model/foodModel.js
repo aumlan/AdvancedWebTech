@@ -15,7 +15,7 @@ module.exports = {
     },
     insert: function(food, callback) {
         var sql = "insert into foods values (NULL, ?, ?, ?, ?)";
-        db.execute(sql, [food.title, food.description, food.image, food.restaurantId], function(status) {
+        db.execute(sql, [food.title, food.description, food.restaurantId, food.image], function(status) {
             callback(status);
         });
     },
