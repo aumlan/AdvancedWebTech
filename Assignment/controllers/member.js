@@ -93,7 +93,7 @@ router.get('/restaurant/:restaurantId/menu/review/:foodId', (req, res) => {
     });
 });
 
-//AJAX
+//*todo AJAX XXXXXXXX
 router.get('/foodReview/:foodId/:commentText', (req, res) => {
     var comment = {
         memberId: req.session.uId,
@@ -120,6 +120,18 @@ router.get('/foodReview/:foodId/:commentText', (req, res) => {
 });
 
 
+//*todo food/menu details
+router.get('/restaurant/:restaurantId/:foodID', (req, res) => {
 
+    foodModel.get(req.params.foodID, function(result) {
+        if (result.length > 0) {
+            var foodDetails = {
+                food: result[0]
+            }
+            console.log(result[0].F_IMAGE);
+            res.render('member/foodDetails', foodDetails);
+        }
+    });
+});
 
 module.exports = router;

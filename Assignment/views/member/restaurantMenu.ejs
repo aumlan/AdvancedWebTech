@@ -55,7 +55,9 @@
                         <%= menuList[i].F_ID %>
                     </td>
                     <td align="center">
-                        <%= menuList[i].F_TITLE %>
+                        <a href="/member/restaurant/<%= menuList[i].R_ID %>/<%= menuList[i].F_ID %>">
+                            <%= menuList[i].F_TITLE %>
+                        </a>
                     </td>
                     <td align="center">
                         <%= menuList[i].F_DESCRIPTION %>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>All Menu</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<body>
+    <ul>
+        <li><a href="/member">Home</a></li>
+        <li style="float:right"><a href="/logout">Log Out</a></li>
+        <li style="float:right">
+            <div class="dropdown">
+                <div class="dropbtn">Profile</div>
+                <div class="dropdown-content">
+                    <a href="/member/profile">View Profile</a>
+                    <a href="/member/editProfile">Edit Profile</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div align="center">
+        <span align="center">
+            <img align="center" src="<%=food.F_IMAGE%>" alt="logo" height="200px" width="200px"/>
+        </span>
+        <span align="center">
+            <h4><%=food.F_NAME%></h4>
+        </span>
+        <span align="center">
+            <h2><%=food.F_TITLE%></h2>
+        </span>
+        <span align="center">
+            <i><%=food.F_DESCRIPTION	%></i>
+        </span>
+        <br/>
+        <span align="center"><%=food.R_ID%></span>
+        <br/>
+
+
+    </div>
+</body>
+
+</html>
