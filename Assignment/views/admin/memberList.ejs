@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<body>
+    <ul>
+        <li><a href="/admin">Home</a></li>
+        <li><a href="/logout">Log Out</a></li>
+        <li>
+            <div class="dropdown">
+                <div class="dropbtn">Profile</div>
+                <div class="dropdown-content">
+                    <a href="/admin/profile">View Profile</a><br>
+                    <a href="/admin/editProfile">Edit Profile</a>
+                </div>
+            </div>
+        </li>
+        <li><a class="active" href="/admin/restaurants">All Restaurants</a></li>
+        <li><a href="/admin/addRestaurant">Add Restaurant</a></li>
+    </ul>
+    <div align="center">
+        <span align="center">
+            <h3>All Restaurants</h3>
+        </span>
+        <table border="1px" width="80%">
+            <tr>
+                <th width="10%">Image</th>
+                <th width="30%">ID</th>
+                <th width="30%">Name</th>
+                <th width="20%">Email</th>
+                <th width="20%">Action</th>
+            </tr>
+
+            <% for(var i=0; i < restaurantList.length; i++){ %>
+                <tr>
+                    <td>
+                        <img align="center" src="<%= restaurantList[i].M_IMAGE %>" alt="logo" height="100px" width="100px" />
+                    </td>
+                    <td>
+                        <%= restaurantList[i].M_ID %>
+                    </td>
+                    <td>
+                        <%= restaurantList[i].M_NAME %>
+                    </td>
+                    <td>
+                        <%= restaurantList[i].M_ADDRESS %>
+                    </td>
+                    <td>
+                        <%= restaurantList[i].M_EMAIL %>
+                    </td>
+                    <td>
+                        <a href="/admin/members/view/<%= restaurantList[i].M_ID %>">View Menu</a> |
+                        <a href="/admin/members/addMenu1/<%= restaurantList[i].M_ID %>">Add Menu</a> |
+                        <a href="/admin/members/edit/<%= restaurantList[i].M_ID %>">Edit</a> |
+                        <a href="/admin/members/delete/<%= restaurantList[i].M_ID %>">Delete</a>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+</body>
+
+</html>

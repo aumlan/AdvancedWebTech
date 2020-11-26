@@ -2,6 +2,7 @@ var express = require('express');
 var adminModel = require.main.require('./model/adminModel');
 var restaurantModel = require.main.require('./model/restaurantModel');
 var foodModel = require.main.require('./model/foodModel');
+var memberModel = require.main.require('./model/memberModel');
 var router = express.Router();
 
 router.get('*', function(req, res, next) {
@@ -217,6 +218,9 @@ router.post('/restaurant/delete/:restaurantId', (req, res) => {
 
 //*todo delete restaurant endddddd
 
+
+
+//*todo AJAX XXXXXXXXXXXXXXX
 router.get('/restaurant/view/:restaurantId', (req, res) => {
     var restaurantDetails;
     restaurantModel.get(req.params.restaurantId, function(result) {
@@ -241,8 +245,39 @@ router.get('/restaurant/view/:restaurantId', (req, res) => {
     });
 });
 
+//*todo AJAX endddddddddddd
 
+//*todo delete member
+router.get('/members', (req, res) => {
+    memberModel.getAll(function(results) {
+        if (results.length > 0) {
+            var restaurants = {
+                restaurantList: results
+            };
+            res.render('admin/memberList', restaurants);
+        }
+    });
+});
 
+router.get('/members/delete/:M_ID', (req, res) => {
+    memberModel.get(req.params.M_ID, function(result) {
+        if (result.length > 0) {
+            res.render('admin/deleteMember', result[0]);
+        } else {
+            res.redirect('/admin/members');
+        }
+    });
+});
+
+router.post('/members/delete/:M_ID', (req, res) => {
+    memberModel.delete(req.params.M_ID, function(success) {
+        if (success) {
+            res.redirect('/admin/members');
+        } else {
+            res.redirect("/admin/members/delete/" + req.params.M_ID);
+        }
+    });
+});
 
 
 
